@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+  <head>
+     <meta charset="utf-8"/>
+     <meta name="description" content="Resumen del contenido de la página">   
+     <title>Título de la página</title>
+     <link rel="stylesheet" href="css/estilo.css" type="text/css"/>
+     <style type="text/css">
+
+     </style>
+     <script type="text/javascript">
+
+     </script>
+     <script type="text/javascript" src="js/codigo.js"></script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
+     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
+  </head>
+
+  <body>
+    <h3>Registro de Usuarios</h3>
+    <table id="data_table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Ciudad</th>
+            </tr>
+        </thead>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type ="text/javascript">
+        $(function()
+        {
+            $.ajax({
+                url:'/usuarios',
+                type:"GET",
+                success:function(response)
+                {
+                    #console.log("Este es el response", response["datos"])
+                    $('#data_table').DataTable({
+                        pageLength:10,
+                        "data":response["datos"],
+                        "columns":[
+                        {"data":"nombre"},
+                        {"data":"correo"},
+                        {"data":"ciudad"}
+                        ]
+                    })
+                }
+            })
+        })
+  </body>
+
+  </html>
